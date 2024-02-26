@@ -1,0 +1,66 @@
+import "./App.css";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Chatlayout from "./pages/Chatlayout";
+import Navbar from "./components/Header";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Route,
+  Link,
+} from "react-router-dom";
+import Footer from "./components/Footer";
+import ErrorPage from "./pages/ErrorPage.jsx";
+
+
+const DashBoard = () => {
+  return (
+    <div>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </div>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DashBoard />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/chat",
+    element: <Chatlayout />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+]);
+
+function App() {
+  return (
+    <div className="app">
+      <RouterProvider router={router} />
+    </div>
+  );
+}
+
+export default App;
